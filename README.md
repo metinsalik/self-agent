@@ -101,3 +101,14 @@ services:
     networks:
       - secure-network
 ```
+
+Sistemi başlatıyoruz.
+```
+docker compose up -d
+```
+Sistemi tekrar durdurup başlatmak için:
+
+```
+docker compos down && docker compose up -d
+```
+
