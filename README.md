@@ -111,4 +111,19 @@ Sistemi tekrar durdurup başlatmak için:
 ```
 docker compos down && docker compose up -d
 ```
+## Domain ve SSL Ayarları
+
+Nginx Proxy Manager: Tarayıcıdan http://SUNUCU_IP:81 adresine girin.
+2. Varsayılan Giriş: admin@example.com / changeme (Hemen değiştirin!)
+3. Proxy Host Ekle:
+Domain: abcdomain.com
+Forward Host: n8n | Port: 5678
+SSL sekmesinden "Request a new SSL Certificate" seçin.
+
+## Yapay Zekayı İçeriden Başlatma
+
+```
+docker exec -it ollama ollama run llama3
+```
+
 
