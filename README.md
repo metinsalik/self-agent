@@ -107,6 +107,14 @@ Sistemi başlatıyoruz.
 ```powershell
 docker compose up -d
 ```
+
+Sonra izinleri verelim.
+
+```powershell
+sudo chown -R 1000:1000 ~/ai-bot/n8n-data
+sudo chmod -R 777 ~/ai-bot/n8n-data
+```
+
 ## 🛠️ Bakım ve Sorun Giderme
 - **Uygulamayı Durdurmak İçin:** `docker compose down`
 - **Uygulamayı Restart İçin:** `docker compose down && docker compose up -d`
