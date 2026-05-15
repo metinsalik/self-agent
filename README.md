@@ -1,7 +1,7 @@
 ## Hazırlık ve Güvenlik Duvarı
 İlk olarak sunucunun kapılarını sıkılaştıralım. Sadece ihtiyacımız olan portları açıyoruz.
 
-```
+```powershell
 sudo ufw allow 22/tcp
 sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
@@ -9,19 +9,19 @@ sudo ufw enable
 ```
 ## Docker ve Docker Compose Kurulumu
 Tüm sistemi konteyner yapısında izole etmek için Docker kuruyoruz.
-```
+```powershell
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 ## Merkezi Yapılandırma (Docker Compose)
 Sunucuda bir çalışma dizini oluşturun:
-```
+```powershell
 mkdir ~/ai-bot && cd ~/ai-bot
 ```
-```
+```powershell
 nano docker-compose.yml
 ```
-```
+```powershell
 version: '3.8'
 
 networks:
@@ -103,27 +103,30 @@ services:
 ```
 
 Sistemi başlatıyoruz.
-```
+
+```powershell
 docker compose up -d
 ```
-Sistemi tekrar durdurup başlatmak için:
+## 🛠️ Bakım ve Sorun Giderme
+- **Uygulamayı Durdurmak İçin:** `docker compose down`
+- **Uygulamayı Restart İçin:** `docker compose down && docker compose up -d`
+- **Logları (Hataları) Görmek İçin:** `docker logs -f ...`
+- **Uygulamayı Güncellemek İçin:** Dosyaları güncelleyip tekrar `docker compose up -d --build` komutunu çalıştırın.
 
-```
-docker compos down && docker compose up -d
-```
+
 ## Domain ve SSL Ayarları
 
-Nginx Proxy Manager: Tarayıcıdan http://SUNUCU_IP:81 adresine girin.
-2. Varsayılan Giriş: admin@example.com / changeme (Hemen değiştirin!)
-3. Proxy Host Ekle:
-Domain: abcdomain.com
-Forward Host: n8n | Port: 5678
+1. **Nginx Proxy Manager:** Tarayıcıdan http://SUNUCU_IP:81 adresine girin.
+2. **Varsayılan Giriş:** admin@example.com / changeme (Hemen değiştirin!)
+3. **Proxy Host Ekle:**
+**Domain:** abcdomain.com
+**Forward Host:** n8n | Port: 5678
 SSL sekmesinden "Request a new SSL Certificate" seçin.
 
 ## Yapay Zekayı İçeriden Başlatma
 
-```
+```powershell
 docker exec -it ollama ollama run llama3
 ```
-
+Model indikten sonra n8n içinde Ollama Node ekleyip URL kısmına `http://ollama:11434` yazmanız yeterli olacaktır.
 
